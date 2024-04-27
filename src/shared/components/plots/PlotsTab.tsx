@@ -4464,8 +4464,9 @@ export default class PlotsTab extends React.Component<IPlotsTabProps, {}> {
                             </label>
                         </div>
                     )}
-                    {this.isStacked && (
+                    {this.isStacked && this.plotType.result == 3 && (
                         <div className="form-group">
+                            {console.log(this.isStacked, 'tjissssss')}
                             <label style={{ margin: '0' }}>
                                 <b>Sort</b>
                             </label>
@@ -5415,6 +5416,7 @@ export default class PlotsTab extends React.Component<IPlotsTabProps, {}> {
                                 />
                             );
                         } else {
+                            console.log(plotType, 'plotupe');
                             plotElt = (
                                 <MultipleCategoryBarPlot
                                     svgId={SVG_ID}
