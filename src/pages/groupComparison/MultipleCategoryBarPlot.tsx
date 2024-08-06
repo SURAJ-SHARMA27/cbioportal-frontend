@@ -58,6 +58,9 @@ export interface IMultipleCategoryBarPlotProps {
     svgRef?: (svgContainer: SVGElement | null) => void;
     pValue: number | null;
     qValue: number | null;
+    SortByDropDownOptions?: { value: string; label: string }[];
+    updateSelectedOption?: (option: { value: string; label: string }[]) => void;
+    sortByOption?: string;
 }
 
 export interface IMultipleCategoryBarPlotData {
@@ -435,6 +438,18 @@ export default class MultipleCategoryBarPlot extends React.Component<
         }
     }
 
+    private setInitialSelectedOption = () => {
+        if (this.props.updateSelectedOption) {
+            const minorCategoriesArray = this.data.map(item => ({
+                value: item.minorCategory,
+                label: item.minorCategory,
+            }));
+            this.props.updateSelectedOption(minorCategoriesArray);
+        }
+    };
+    componentDidMount() {
+        this.setInitialSelectedOption();
+    }
     @bind
     private formatCategoryTick(t: number, index: number) {
         //return wrapTick(this.labels[index], MAXIMUM_CATEGORY_LABEL_SIZE);
@@ -739,7 +754,8 @@ export default class MultipleCategoryBarPlot extends React.Component<
             this.categoryCoord,
             !!this.props.horizontalBars,
             !!this.props.stacked,
-            !!this.props.percentage
+            !!this.props.percentage,
+            this.props.sortByOption
         );
         return barSpecs.map(spec => (
             <VictoryBar
