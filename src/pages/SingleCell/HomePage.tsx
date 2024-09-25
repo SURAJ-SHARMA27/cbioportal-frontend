@@ -10,7 +10,7 @@ import {
 import autobind from 'autobind-decorator';
 import Select from 'react-select';
 import ReactSelect from 'react-select1';
-import jsondata from './jsonData/sample.json';
+const jsondata = require('./jsonData/sample.json');
 import singleCellStore, { SampleOption } from './SingleCellStore';
 import {
     ChartMeta,
